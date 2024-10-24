@@ -24,7 +24,6 @@ app.get("/notes", (req, res) =>
 
 // API routes GET
 app.get("/api/notes", (req, res) => {
-  console.log("Help");
   // Read notes from db.json
   fs.readFile(path.join(__dirname, "db/db.json"), "utf8", (err, data) => {
     if (err) {
@@ -51,7 +50,7 @@ app.post("/api/notes", (req, res) => {
     // Parse the existing notes and adds new note
     const notes = JSON.parse(data);
     notes.push(newNote);
-    // for deleting, filter out  lines 46-66 (replace 53 with filter array method req.params.id)
+
     try {
       fs.writeFileSync(
         path.join(__dirname, "db/db.json"),
@@ -62,6 +61,30 @@ app.post("/api/notes", (req, res) => {
       res.json(newNote);
     } catch (err) {
       return res.status(500).json({ error: "Failed to save note" });
+    }
+  });
+});
+
+// API DELETE ROUTES
+app.delete("/api/notes/:id", (req, res) => {
+  fs.readFile(path.join(__dirname, "db/db.json"), "utf8", (err, data) => {
+    const noteId = req.params.id;
+    if (err) {
+      return res.status(500).json({ error: "Failed to read notes" });
+    }
+
+    const notes = JSON.parse(data);
+    const updatedNotes = notes.filter((note) => note.id !== noteId);
+
+    try {
+      fs.writeFileSync(
+        path.join(__dirname, "db/db.json"),
+        JSON.stringify(updatedNotes, null, 2),
+        "utf8"
+      );
+      res.json({ message: "Note deleted successfully" });
+    } catch (err) {
+      return res.status(500).json({ error: "Failed to delete note" });
     }
   });
 });

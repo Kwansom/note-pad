@@ -1,18 +1,1 @@
-[
-  { "title": "Test Title", "text": "Test text" },
-  {
-    "id": "fc230d27-de77-41a3-82ad-046ff3053f67",
-    "title": "LUNCH ",
-    "text": "EAT"
-  },
-  {
-    "id": "224153cc-a6d3-4e24-969f-22e110f05637",
-    "title": "Coding HW",
-    "text": "Trying"
-  },
-  {
-    "id": "1480c0bb-05cf-4e25-bcde-b7dbd779b7ed",
-    "title": "HW 11",
-    "text": "Finish!"
-  }
-]
+[]
