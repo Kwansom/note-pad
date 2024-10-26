@@ -8,8 +8,8 @@ const { v4: uuidv4 } = require("uuid"); // Helper to generate ids
 const app = express();
 
 // Specifying on which port the Express.js server will run
-const PORT = 3001;
-
+// const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 // Invoke app.use() and serve static files from the '/public' folder
 app.use(express.static("public"));
 
